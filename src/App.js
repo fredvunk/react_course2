@@ -16,14 +16,17 @@ class App extends Component {
   componentWillMount(){
     this.setState({projects: [
         {
+          id: 1,
           title: 'Business website',
           category: 'Web Design'
         },
         {
+          id: 2,
           title: 'Social app',
           category: 'Mobile Development'
         },
         {
+          id: 3,
           title: 'Shopping Card',
           category: 'Web development'
         }
@@ -35,12 +38,19 @@ handleAddProject(project){
     this.setState({projects:projects});
 }
 
+    handleDeleteProject(id){
+        let projects = this.state.projects;
+        let index = projects.findIndex(x => x.id === id);
+        projects.splice(index, 1);
+        this.setState({projects:projects});
+    }
+
   render() {
     return (
       <div className="App">
 
         <AddProject addProject={this.handleAddProject.bind(this)}/>
-        <Projects projects={this.state.projects} />
+        <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />
       </div>
     );
   }

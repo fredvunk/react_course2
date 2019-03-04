@@ -16,6 +16,7 @@ class AddProject extends Component {
             alert('Title is required');
         } else {
             this.setState({newProject:{
+                id: 4,
                 title: this.refs.title.value,
                     category: this.refs.category.value
                 }}, function(){
@@ -43,6 +44,7 @@ class AddProject extends Component {
                             {categoryOptions}
                         </select>
                     </div>
+                    <br />
 <input type="submit" value="Submit" />
                 </form>
             </div>
