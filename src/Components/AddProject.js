@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import uuid from 'uuid';
 
 class AddProject extends Component {
     constructor(){
@@ -7,6 +8,7 @@ class AddProject extends Component {
             newProject:{}
         }
     }
+
     static defaultProps = {
         categories: ['Web Design', 'Web Development', 'Mobile Development']
     }
@@ -16,10 +18,11 @@ class AddProject extends Component {
             alert('Title is required');
         } else {
             this.setState({newProject:{
-                id: 4,
-                title: this.refs.title.value,
+                    id: uuid.v4(),
+                    title: this.refs.title.value,
                     category: this.refs.category.value
                 }}, function(){
+                //console.log(this.state);
                 this.props.addProject(this.state.newProject);
             });
         }
@@ -35,21 +38,27 @@ class AddProject extends Component {
                 <h3>Add Project</h3>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div>
-                        <label>Title</label> <br/>
-                        <input type="text" ref="title"/>
+                        <label>Title</label><br />
+                        <input type="text" ref="title" />
                     </div>
                     <div>
-                        <label>Category</label> <br/>
+                        <label>Category</label><br />
                         <select ref="category">
                             {categoryOptions}
                         </select>
                     </div>
                     <br />
-<input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" />
+                    <br />
                 </form>
             </div>
         );
     }
+}
+
+AddProject.propTypes = {
+    categories: React.PropTypes.array,
+    addProject: React.PropTypes.func
 }
 
 export default AddProject;
